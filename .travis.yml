@@ -1,1 +1,6 @@
-
+deploy:
+  language: java
+  provider: heroku
+  api_key:
+    secure:
+  app: uutisbrojekti
