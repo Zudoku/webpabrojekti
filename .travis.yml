@@ -1,8 +1,5 @@
 language: java
 deploy:
   provider: heroku
-  api_key:
-    - secure: null
-    - secure: >-
-        O3JeH2Y4rVtCuLs3gL75N/wiA6eGx/hgjoDpXqlo+CLZyOK4AfXmd35nxp4uhcp8ldOJD5EsQd7Qwv3Y2wlg3tVv8XCwBnDpIU6lH5leEWnm4gXnwjGvzJs774/J0GxcweP0tNhFfQXZEsxURGTGjHjNefrjw+0fBahWFFb7pcI=
+  api_key: $APIKEY
   app: uutisbrojekti
