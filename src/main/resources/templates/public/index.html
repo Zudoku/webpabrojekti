@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Uuno Uutisporttaali</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <div th:replace="fragments/navbar :: uuno_navbar(julkisetKategoriat=${julkisetKategoriat})"></div>
+            <div class="container">
+                <div class="well well-default" th:each="uutinen : ${uutiset}">
+                    <a style="color:black" th:href="@{~/uutinen/{id}(id=${uutinen.getId()})}">
+                        <h2 th:text="${uutinen.otsikko}">Uutisen otsikko</h2>
+                        <img th:src="@{~/uutiskuva/{id}(id=${uutinen.getId()})}" width="100%"/>
+                    </a>
+                    <label th:text="${uutinen.getTimeStamp()}" > Julkaistu Aika</label><br />
+                    <label th:text="${uutinen.getModifiedTimeStamp()}" > Muokattu aika</label>
+                    <a style="color:black" th:href="@{~/uutinen/{id}(id=${uutinen.getId()})}">
+                        <h3 th:text="${uutinen.ingressi}">Ingressi</h3>
+                    </a>
+                    <a th:href="@{~/uutinen/{id}(id=${uutinen.getId()})}"> Lue lisää</a>
+                    
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

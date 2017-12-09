@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Uuno Uutisporttaali</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <div th:replace="fragments/navbar :: uuno_navbar_toimittaja(toimittaja=${toimittaja})"></div>
+
+            <div class="container">
+                <a style="margin-bottom: 10px;" type="button" class="btn btn-primary btn-lg " href="/toimittaja">Takaisin</a>
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Uusi uutinen</h3>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-inline" th:action="@{~/toimittaja/uutiset}" th:method="POST">
+                            <input type="text" class="form-control" id="teksti" name="teksti"  />
+                            <label>
+                                <input type="checkbox" class="checkbox" id="julkisuus" name="julkisuus" /> Julkinen kategoria
+                            </label>
+                            <input class="btn btn-primary" type="submit" value="Vahvista"/>
+                        </form>
+                    </div>
+                </div>
+                <div th:each="uutinen : ${uutiset}">
+                    <a style="margin-top:5px;"type="button" class="btn btn-primary btn-lg btn-block" th:href="@{~/toimittaja/uutinen/{id}(id=${uutinen.getId()})}">
+                        <label th:text="${uutinen.otsikko}">Uutisen otsikko</label>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -19,6 +19,6 @@ public class DefaultController {
 
     @RequestMapping("*")
     public String handleDefault() {
-        return "index";
+        return "redirect:/";
     }
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Uuno Uutisporttaali</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div>
+            <div th:replace="fragments/navbar :: uuno_navbar(julkisetKategoriat=${julkisetKategoriat})"></div>
+            <div class="container">
+                <div class="well well-default" >
+                    <h2 th:text="${uutinen.otsikko}">Uutisen otsikko</h2>
+                    <img th:src="@{~/uutiskuva/{id}(id=${uutinen.getId()})}" width="100%"/>
+                    <label th:text="${uutinen.getTimeStamp()}" > Julkaistu Aika</label><br />
+                    <label th:text="${uutinen.getModifiedTimeStamp()}" > Muokattu aika</label>
+                    <h3 th:text="${uutinen.sisalto}">Sisältö</h3>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

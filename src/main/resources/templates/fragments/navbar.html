@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Header template</title>
+    </head>
+    <body>
+
+        <div th:fragment="uuno_navbar" >
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/">Uuno Uutisporttaali</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <ul class="nav navbar-nav">
+                            <li th:each="kategoria : ${julkisetKategoriat}"> 
+                                <a th:text="${kategoria.teksti}" th:href="@{~/kategoria/{id}(id=${kategoria.id})}">kategoria</a>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/toimittaja">Toimittaja-mode</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </nav>
+            <div>
+                
+            </div>
+        </div>
+        
+        <div th:fragment="uuno_navbar_toimittaja" >
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="/toimittaja">Uuno Uutisporttaali (Toimittaja-mode)</a>
+                    </div>
+                    <div class="collapse navbar-collapse">
+                        <div class="nav navbar-nav">
+                            <label th:text="${'Olet kirjautuneena käyttäjällä: ' + toimittaja.nimi}">
+                                Et ole kirjautunut
+                            </label>
+                        </div>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="/logout">Kirjaudu ulos</a></li>
+                        </ul>
+                    </div>
+                    
+                </div>
+            </nav>
+            <div>
+                
+            </div>
+        </div>
+
+    </body>
+</html>
