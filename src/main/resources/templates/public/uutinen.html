@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-3">
-                        <div th:replace="fragments/listaukset :: uusimmat_list(uusimmat_uutiset=${uusimmat_uutiset})"></div>
+                        <div th:replace="fragments/listaukset :: uusimmat_list(uusimmat_uutiset=${uusimmat_uutiset},kategoria=${kategoriateksti})"></div>
                     </div>
                     <div class="col-md-6">
                         <div class="well well-default" >
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <div th:replace="fragments/listaukset :: katsotuimmat_list(katsotuimmat_uutiset=${katsotuimmat_uutiset})"></div>
+                        <div th:replace="fragments/listaukset :: katsotuimmat_list(katsotuimmat_uutiset=${katsotuimmat_uutiset},kategoria=${kategoriateksti})"></div>
                     </div>
                 </div>
             </div>
