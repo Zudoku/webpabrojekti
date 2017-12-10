@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Header template</title>
+    </head>
+    <body>
+
+        <div th:fragment="uusimmat_list" >
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Uusimmat</h3>
+                </div>
+                <div class="panel-body">
+                    <ul class="list-group">
+                        <li th:each="uutinen,iter : ${uusimmat_uutiset}" class="list-group-item">
+                            <a th:href="@{~/uutinen/{id}(id=${uutinen.getId()})}">
+                                <label th:text="${(iter.index + 1) + '. ' + uutinen.otsikko}">Uutisen otsikko</label>
+                            </a>
+                            <small th:text="${uutinen.getTimeStamp()}"> Julkaisuaika</small>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div th:fragment="katsotuimmat_list">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Viikon Katsotuimmat</h3>
+                </div>
+                <div class="panel-body">
+                    <ol class="list-group">
+                        <li th:each="uutinen,iter : ${katsotuimmat_uutiset}" class="list-group-item">
+                            <a th:href="@{~/uutinen/{id}(id=${uutinen.getId()})}">
+                                <label th:text="${(iter.index + 1) + '. ' + uutinen.otsikko}">Uutisen otsikko</label>
+                            </a>
+                            <small th:text="${'Katseluja: ' + uutinen.visits}"> Katselukerrat</small>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

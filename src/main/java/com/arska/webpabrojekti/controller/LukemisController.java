@@ -43,6 +43,7 @@ public class LukemisController {
         
         model.addAttribute("julkisetKategoriat", kategoriaService.getPublicCategories());
         model.addAttribute("uutinen", uutisService.getUutinen(id));
+        model.addAttribute("uusimmat_uutiset",  uutisService.getAllUutinen());
         return "public/uutinen";
     }
     
