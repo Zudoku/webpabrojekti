@@ -10,7 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Lob;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,8 +36,11 @@ public class Uutinen extends AbstractPersistable<Long> {
     @Lob
     private byte[] kuva;
     private long visits;
-    //private List<UutisKategoria> kategoriat;
-    //private List<Toimittaja> toimittajat;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<UutisKategoria> kategoriat;
+    @ManyToMany
+    private List<Toimittaja> toimittajat;
     
     public String getTimeStamp(){
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMM yyyy, HH:mm");    

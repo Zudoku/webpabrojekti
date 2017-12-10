@@ -6,7 +6,11 @@
 
 package com.arska.webpabrojekti.domain;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,4 +27,7 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 @Entity
 public class Toimittaja extends AbstractPersistable<Long> {
     private String nimi;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Uutinen> uutiset;
 }

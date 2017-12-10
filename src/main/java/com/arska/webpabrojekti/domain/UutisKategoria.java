@@ -6,7 +6,11 @@
 
 package com.arska.webpabrojekti.domain;
 
+import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,6 +27,9 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 public class UutisKategoria extends AbstractPersistable<Long> {
     private boolean julkisuus;
     private String teksti;
+    
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<Uutinen> uutiset;
     
     public String getButtonText() {
         String result = teksti;

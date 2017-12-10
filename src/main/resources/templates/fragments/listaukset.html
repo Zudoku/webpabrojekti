@@ -9,7 +9,7 @@
         <div th:fragment="uusimmat_list" >
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Uusimmat</h3>
+                    <h3 class="panel-title">Uusimmat <label th:text="${' - ' + kategoria}"></label></h3>
                 </div>
                 <div class="panel-body">
                     <ul class="list-group">
@@ -27,7 +27,7 @@
         <div th:fragment="katsotuimmat_list">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">Viikon Katsotuimmat</h3>
+                    <h3 class="panel-title">Viikon Katsotuimmat <label th:text="${' - ' + kategoria}"></label></h3>
                 </div>
                 <div class="panel-body">
                     <ol class="list-group">

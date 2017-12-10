@@ -7,12 +7,17 @@
 package com.arska.webpabrojekti.repository;
 
 import com.arska.webpabrojekti.domain.Uutinen;
+import com.arska.webpabrojekti.domain.UutisKategoria;
+import java.util.List;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 /**
  * Created Dec 9, 2017
  * @author arska
  */
 public interface UutisRepository extends JpaRepository<Uutinen, Long> {
-
+    List<Uutinen> findByKategoriatContaining(UutisKategoria kategoria, Sort sort);
+    List<Uutinen> findFirst5ByKategoriatContaining(UutisKategoria kategoria, Sort sort);
 }

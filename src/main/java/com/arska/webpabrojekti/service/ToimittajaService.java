@@ -8,6 +8,7 @@ package com.arska.webpabrojekti.service;
 
 import com.arska.webpabrojekti.domain.Toimittaja;
 import com.arska.webpabrojekti.repository.ToimittajaRepository;
+import java.util.ArrayList;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +27,7 @@ public class ToimittajaService {
         if (toimittajaRepository.findByNimi(nimi) != null) {
             return toimittajaRepository.findByNimi(nimi);
         } else {
-            Toimittaja t = new Toimittaja(nimi);
+            Toimittaja t = new Toimittaja(nimi, new ArrayList<>());
             return toimittajaRepository.save(t);
         }
         
