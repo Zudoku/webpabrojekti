@@ -16,7 +16,8 @@
                         <div th:replace="fragments/listaukset :: uusimmat_list(uusimmat_uutiset=${uusimmat_uutiset},kategoria=${kategoriateksti})"></div>
                     </div>
                     <div class="col-md-6">
-                        <h1 th:text="${kategoriateksti}" class="text-center" > UutisKategoria </h1>
+                        <h1 th:text="${kategoriateksti}" class="text-center" > UutisKategoria</h1>
+                        <small th:text="${'Sivu ' + (page + 1)}"></small>
                         <div class="well well-default" th:each="uutinen : ${uutiset}">
                             <a style="color:black" th:href="@{~/uutinen/{id}(id=${uutinen.getId()})}">
                                 <h2 th:text="${uutinen.otsikko}">Uutisen otsikko</h2>
@@ -29,6 +30,12 @@
                             </a>
                             <a th:href="@{~/uutinen/{id}(id=${uutinen.getId()})}"> Lue lisää</a>
 
+                        </div>
+                        <div th:if="${previous_page != null}">
+                            <a class="btn btn-default" th:href="${previous_page}">Edellinen sivu</a>
+                        </div>
+                        <div th:if="${next_page != null}">
+                            <a class="btn btn-default" th:href="${next_page}">Seuraava sivu</a>
                         </div>
                     </div>
                     <div class="col-md-3">

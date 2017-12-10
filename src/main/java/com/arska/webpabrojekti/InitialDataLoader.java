@@ -64,8 +64,8 @@ public class InitialDataLoader implements ApplicationRunner {
     private void setUpKategoria(){
         urheilu = new UutisKategoria(true, "Urheilu", new ArrayList<>());
         terveys = new UutisKategoria(true, "Terveys", new ArrayList<>());
-        some = new UutisKategoria(true, "Sosiaalinen media", new ArrayList<>());
-        viihde = new UutisKategoria(true, "Viihde", new ArrayList<>());
+        some = new UutisKategoria(false, "Sosiaalinen media", new ArrayList<>());
+        viihde = new UutisKategoria(false, "Viihde", new ArrayList<>());
         politiikka = new UutisKategoria(false, "Politiikka", new ArrayList<>());
         kategoriaRepository.save(urheilu);
         kategoriaRepository.save(terveys);
@@ -79,8 +79,6 @@ public class InitialDataLoader implements ApplicationRunner {
         
         setUpUrheilu(newsPicData);
         setUpTerveys(newsPicData);
-        ///setUpSosiaalinenMedia(newsPicData);
-        //setUpViihde(newsPicData);
     }
 
     private void setUpTerveys(byte[] newsPicData) {
@@ -159,7 +157,7 @@ public class InitialDataLoader implements ApplicationRunner {
         u = new Uutinen("3 Asiaa jotka vain urheilijat ymmärtävät", "Klikkaa selvittääksesi oletko urheilija!",
                 "1. Urheilun jälkeen maistuu ruoka. 2. Aina ei vain jaksa. 3. Urheilua ei lasketa ellet ota kuvaa someen",
                 System.currentTimeMillis() - (r.nextInt(5) * 1000 * 60 * 60 * 24), System.currentTimeMillis(), newsPicData, r.nextInt(200),
-                Collections.singletonList(urheilu), getRandomToimittaja());
+                Arrays.asList(urheilu, some), getRandomToimittaja());
 
         uutisRepository.save(u);
 

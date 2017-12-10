@@ -38,8 +38,16 @@ public class LukemisController {
         model.addAttribute("kategoriateksti", "Kaikki");
         model.addAttribute("uusimmat_uutiset",  uutisService.getUusimmat5());
         model.addAttribute("katsotuimmat_uutiset",  uutisService.getKatsotuimmat5());
-        
-        
+
+
+        int totalPages = (int) Math.floor((double)uutisService.getAllUutinen().size() / 5D);
+        model.addAttribute("page", page);
+        if(page < totalPages){
+            model.addAttribute("next_page","/?page=" + (page + 1));
+        }
+        if(page > 0) {
+            model.addAttribute("previous_page","/?page=" + (page - 1));
+        }
         return "public/index";
     }
     
@@ -60,17 +68,25 @@ public class LukemisController {
     }
     
     @GetMapping("/kategoria/{id}")
-    public String handleGetKategoria(Model model, @PathVariable long id) {
+    public String handleGetKategoria(Model model, @PathVariable long id, @RequestParam(required=false, defaultValue="0") int page) {
         if(kategoriaService.getKategoria(id) == null){
             return "redirect:/";
         }
         
         model.addAttribute("julkisetKategoriat", kategoriaService.getPublicCategories());
-        model.addAttribute("uutiset", kategoriaService.getUusimmat(id, true));
+        model.addAttribute("uutiset", kategoriaService.getUusimmat(id, false, page));
         model.addAttribute("kategoriateksti", kategoriaService.getKategoria(id).getTeksti());
-        model.addAttribute("uusimmat_uutiset",  kategoriaService.getUusimmat(id, true));
-        model.addAttribute("katsotuimmat_uutiset",  kategoriaService.getKatsotuimmat(id, true));
-        
+        model.addAttribute("uusimmat_uutiset",  kategoriaService.getUusimmat(id, true, 0));
+        model.addAttribute("katsotuimmat_uutiset",  kategoriaService.getKatsotuimmat(id, true, 0));
+
+        int totalPages = (int) Math.floor((double) kategoriaService.getAllFromCategory(id).size() / 5D);
+        model.addAttribute("page", page);
+        if(page < totalPages){
+            model.addAttribute("next_page","/kategoria/" + id + "?page=" + (page + 1));
+        }
+        if(page > 0) {
+            model.addAttribute("previous_page","/kategoria/" + id + "?page=" + (page - 1));
+        }
         
         return "public/index";
     }

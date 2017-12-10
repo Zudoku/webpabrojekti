@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -64,29 +66,38 @@ public class KategoriaService {
         }
     }
     
-    public List<Uutinen> getKatsotuimmat(long id, boolean limitToFive){
+    public List<Uutinen> getKatsotuimmat(long id, boolean first, int page){
         UutisKategoria kategoria = getKategoria(id);
         if(kategoria != null){
-            if(limitToFive){
+            if(first){
                 return uutisRepository.findFirst5ByKategoriatContaining(kategoria, Sort.by(Sort.Direction.DESC, "visits"));
             } else {
-                return uutisRepository.findByKategoriatContaining(kategoria, Sort.by(Sort.Direction.DESC, "visits"));
+                return uutisRepository.findByKategoriatContaining(kategoria, PageRequest.of(page, 5, Sort.Direction.DESC, "visits"));
             }
         }
         
         return new ArrayList<>();
     }
     
-    public List<Uutinen> getUusimmat(long id, boolean limitToFive){
+    public List<Uutinen> getUusimmat(long id, boolean first, int page){
         UutisKategoria kategoria = getKategoria(id);
         if(kategoria != null){
-            if(limitToFive){
+            if(first){
                 return uutisRepository.findFirst5ByKategoriatContaining(kategoria, Sort.by(Sort.Direction.DESC, "created"));
             } else {
-                return uutisRepository.findByKategoriatContaining(kategoria, Sort.by(Sort.Direction.DESC, "created"));
+                return uutisRepository.findByKategoriatContaining(kategoria, PageRequest.of(page, 5, Sort.Direction.DESC, "created"));
             }
         }
         
+        return new ArrayList<>();
+    }
+
+    public List<Uutinen> getAllFromCategory(long id){
+        UutisKategoria kategoria = getKategoria(id);
+        if(kategoria != null){
+            return uutisRepository.findByKategoriatContaining(kategoria);
+        }
+
         return new ArrayList<>();
     }
 

@@ -88,4 +88,6 @@ public class UutisService {
         Pageable p = PageRequest.of(0, 5, Sort.Direction.DESC, "created");
         return uutisRepository.findAll(p);
     }
+
+
 }
