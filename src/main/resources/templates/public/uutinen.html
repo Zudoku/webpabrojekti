@@ -11,12 +11,19 @@
         <div>
             <div th:replace="fragments/navbar :: uuno_navbar(julkisetKategoriat=${julkisetKategoriat})"></div>
             <div class="container">
-                <div class="well well-default" >
-                    <h2 th:text="${uutinen.otsikko}">Uutisen otsikko</h2>
-                    <img th:src="@{~/uutiskuva/{id}(id=${uutinen.getId()})}" width="100%"/>
-                    <label th:text="${uutinen.getTimeStamp()}" > Julkaistu Aika</label><br />
-                    <label th:text="${uutinen.getModifiedTimeStamp()}" > Muokattu aika</label>
-                    <h3 th:text="${uutinen.sisalto}">Sisältö</h3>
+                <div class="row">
+                    <div class="col-md-2">.col-md-4</div>
+                    <div class="col-md-8">
+                        <div class="well well-default" >
+                            <h2 th:text="${uutinen.otsikko}">Uutisen otsikko</h2>
+                            <img th:src="@{~/uutiskuva/{id}(id=${uutinen.getId()})}" width="100%"/>
+                            <label th:text="${uutinen.getTimeStamp()}" > Julkaistu Aika</label><br />
+                            <label th:text="${uutinen.getModifiedTimeStamp()}" > Muokattu aika</label><br />
+                            <label th:text="${'Katseluja: ' + uutinen.visits}" > Julkaistu Aika</label><br />
+                            <h4 th:text="${uutinen.sisalto}">Sisältö</h4>
+                        </div>
+                    </div>
+                    <div class="col-md-2">.col-md-4</div>
                 </div>
             </div>
         </div>

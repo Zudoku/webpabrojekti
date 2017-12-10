@@ -57,4 +57,12 @@ public class UutisService {
             uutisRepository.save(uutinen);
         }
     }
+    
+    public void katseleUutinen(long id){
+        Uutinen uutinen = getUutinen(id);
+        if(uutinen != null){
+            uutinen.setVisits(uutinen.getVisits() +1);
+            uutisRepository.save(uutinen);
+        }
+    }
 }

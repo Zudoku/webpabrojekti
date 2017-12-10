@@ -39,6 +39,8 @@ public class LukemisController {
     
     @GetMapping("/uutinen/{id}")
     public String handleGetUutinen(Model model, @PathVariable long id) {
+        uutisService.katseleUutinen(id);
+        
         model.addAttribute("julkisetKategoriat", kategoriaService.getPublicCategories());
         model.addAttribute("uutinen", uutisService.getUutinen(id));
         return "public/uutinen";
