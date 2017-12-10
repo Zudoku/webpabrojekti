@@ -30,4 +30,8 @@ public class Toimittaja extends AbstractPersistable<Long> {
     
     @ManyToMany(fetch = FetchType.EAGER)
     private List<Uutinen> uutiset;
+
+    public String nimi(){
+        return nimi;
+    }
 }

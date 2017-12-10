@@ -22,6 +22,8 @@
                             <label th:text="${uutinen.getTimeStamp()}" > Julkaistu Aika</label><br />
                             <label th:text="${uutinen.getModifiedTimeStamp()}" > Muokattu aika</label><br />
                             <label th:text="${'Katseluja: ' + uutinen.visits}" > Julkaistu Aika</label><br />
+                            <label th:text="${uutinen.getToimittajatString()}" > Toimittajat </label><br />
+                            <label th:text="${uutinen.getKategoriatString()}" > Kategoriat </label><br />
                             <h5 th:text="${uutinen.sisalto}">Sisältö</h5>
                         </div>
                     </div>

@@ -38,4 +38,8 @@ public class UutisKategoria extends AbstractPersistable<Long> {
         }
         return result;
     }
+
+    public String teksti(){
+        return teksti;
+    }
 }

@@ -55,6 +55,24 @@ public class Uutinen extends AbstractPersistable<Long> {
         Date updatedDate = new Date(updated);
         return " Muokattu viimeksi: " + sdf.format(updatedDate);
     }
+
+    public String getToimittajatString(){
+        String result = "Kirjoittanut: ";
+        for(Toimittaja toimittaja : toimittajat){
+            result += ( toimittaja.nimi() + " ");
+        }
+
+        return result;
+    }
+
+    public String getKategoriatString(){
+        String result = "Kategoriat: ";
+        for(UutisKategoria kategoria : kategoriat){
+            result += ( kategoria.teksti() + " ");
+        }
+
+        return result;
+    }
     
     
 
