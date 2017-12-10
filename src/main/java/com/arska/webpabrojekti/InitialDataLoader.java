@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+
+import com.google.common.io.ByteStreams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -68,9 +70,7 @@ public class InitialDataLoader implements ApplicationRunner {
     }
 
     private void setUpUutinen() throws IOException, URISyntaxException {
-        URL path = resourceLoader.getClassLoader().getResource("news.jpg");
-        File fi = new File(path.toURI());
-        byte[] newsPicData = Files.readAllBytes(fi.toPath());
+        byte[] newsPicData = ByteStreams.toByteArray(resourceLoader.getClassLoader().getResourceAsStream("news.jpg"));
         
         
         
