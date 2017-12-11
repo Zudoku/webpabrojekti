@@ -1,16 +1,39 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Uuno Uutisporttaali</title>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <div>
+            <div th:replace="fragments/navbar :: uuno_navbar_toimittaja(toimittaja=${toimittaja})"></div>
+            <div class="container">
+                <a style="margin-bottom: 10px;" type="button" class="btn btn-primary btn-lg " href="/toimittaja/uutiset">Takaisin</a>
+                <div class="well well-default">
+                    <form th:action="@{~/toimittaja/uutinen/{id}(id=${uutinen.getId()})}" th:method="POST">
+                        <label for="otsikko">Otsikko</label>
+                        <input required="true" type="text" class="form-control" id="otsikko" name="otsikko" th:value="${uutinen.otsikko}" />
+                        <label for="ingressi">Ingressi</label>
+                        <input required="true" type="text" class="form-control" id="ingressi" name="ingressi" th:value="${uutinen.ingressi}" />
+                        <label for="sisalto">Sisältö</label>
+                        <textarea required="true" class="form-control" id="sisalto" name="sisalto" rows="5" th:text="${uutinen.sisalto}" ></textarea>
+                        <label for="kategoriat">Kategoriat</label>
+                        <select  required="true" multiple="true" class="form-control" id="kategoriat" name="kategoriat" size="7" >
+                            <option th:each="kategoria : ${kategoriat}" th:text="${kategoria.teksti}" th:value="${kategoria.getId()}" th:selected="${uutinen.kategoriat.contains(kategoria)}"></option>
+                        </select>
+                        
+                        <input class="btn btn-primary" type="submit" style="margin-top: 20px;" value="Muokkaa"/>
+                    </form>
+                    <hr />
+                    <form  class="form-inline" th:action="@{~/toimittaja/uutinen/{id}(id=${uutinen.getId()})}" th:method="DELETE">
+                        <input class="btn btn-danger" type="submit" value="Poista kategoria"/>
+                    </form>
+                </div>
+            </div>
+        </div>
     </body>
 </html>

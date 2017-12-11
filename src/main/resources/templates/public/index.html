@@ -3,6 +3,7 @@
     <head>
         <title>Uuno Uutisporttaali</title>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"/>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
@@ -29,13 +30,12 @@
                                 <h3 th:text="${uutinen.ingressi}">Ingressi</h3>
                             </a>
                             <a th:href="@{~/uutinen/{id}(id=${uutinen.getId()})}"> Lue lisää</a>
-
                         </div>
                         <div th:if="${previous_page != null}">
-                            <a class="btn btn-default" th:href="${previous_page}">Edellinen sivu</a>
+                            <a class="btn btn-default" th:href="${previous_page}" style="margin-bottom: 20px;" >Edellinen sivu</a>
                         </div>
                         <div th:if="${next_page != null}">
-                            <a class="btn btn-default" th:href="${next_page}">Seuraava sivu</a>
+                            <a class="btn btn-default" th:href="${next_page}" style="margin-bottom: 20px;">Seuraava sivu</a>
                         </div>
                     </div>
                     <div class="col-md-3">
