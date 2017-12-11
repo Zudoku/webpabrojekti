@@ -53,7 +53,7 @@ public class KategoriaService {
         return kategoriaRepository.save(kategoria);
     }
     
-    public void poistaKategoriaJaSiihenLiittyvatUutiset(long id) {
+    public void poistaKategoria(long id) {
         kategoriaRepository.deleteById(id);
     }
     

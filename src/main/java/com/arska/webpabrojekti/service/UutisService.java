@@ -52,7 +52,7 @@ public class UutisService {
         return uutisRepository.save(uutinen);
     }
     
-    public void paivitaUutinen(long id, String otsikko, String ingressi, String sisalto, byte[] kuva, Toimittaja toimittaja){
+    public void paivitaUutinen(long id, String otsikko, String ingressi, String sisalto, byte[] kuva, List<UutisKategoria> kategoriat, Toimittaja toimittaja){
         Uutinen uutinen = getUutinen(id);
         if(uutinen != null){
             uutinen.setOtsikko(otsikko);
@@ -60,7 +60,13 @@ public class UutisService {
             uutinen.setSisalto(sisalto);
             uutinen.setKuva(kuva);
             uutinen.setUpdated(System.currentTimeMillis());
+            uutinen.setKategoriat(kategoriat);
             
+            List<Toimittaja> toimittajatUusi = uutinen.getToimittajat();
+            if (toimittajatUusi.contains(toimittaja)) {
+                toimittajatUusi.add(toimittaja);
+                uutinen.setToimittajat(toimittajatUusi);
+            }
             uutisRepository.save(uutinen);
         }
     }

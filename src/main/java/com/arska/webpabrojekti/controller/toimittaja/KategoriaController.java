@@ -74,10 +74,11 @@ public class KategoriaController {
         if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
             return "redirect:/toimittaja";
         } else {
-            kategoriaService.poistaKategoriaJaSiihenLiittyvatUutiset(id);
+            kategoriaService.poistaKategoria(id);
             return "redirect:/toimittaja/kategoriat";
         }
     }
+    
     @PostMapping("/toimittaja/kategoria/{id}")
     public String handleUpdateKategoria(Model model, HttpSession session, @RequestParam String  teksti, 
             @RequestParam(required=false) Boolean julkisuus, @PathVariable long id) {

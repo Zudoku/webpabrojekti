@@ -23,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -98,6 +99,44 @@ public class UutisController {
                     toimittajaService.getToimittaja(sessionToimittajaID));
             
             return "redirect:/toimittaja/uutinen/" + luotuUutinen.getId();
+        }
+    }
+    
+    @PostMapping("/toimittaja/uutinen/{id}")
+    public String handleModifyUutinen(Model model, HttpSession session,
+            @PathVariable long id,
+            @RequestParam String  otsikko, @RequestParam String  ingressi, 
+            @RequestParam String  sisalto, @RequestParam("kuva") MultipartFile kuva,
+            @RequestParam String[]  kategoriat) {
+        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+            return "redirect:/toimittaja";
+        } else {
+            long sessionToimittajaID = (long) session.getAttribute(TOIMITTAJAID);
+            
+            List<UutisKategoria> valitutKategoriat = new ArrayList<>();
+            for(String kategoriaID : kategoriat){
+                valitutKategoriat.add(kategoriaService.getKategoria(Long.parseLong(kategoriaID)));
+            }
+            byte[] kuvaBytes;
+            try {
+                kuvaBytes = kuva.getBytes();
+            } catch (IOException ex) {
+                return "redirect:/toimittaja";
+            }
+            
+            uutisService.paivitaUutinen(id, otsikko, ingressi, sisalto, kuvaBytes, valitutKategoriat, toimittajaService.getToimittaja(sessionToimittajaID));
+            
+            return "redirect:/toimittaja/uutiset";
+        }
+    }
+    
+    @DeleteMapping("/toimittaja/uutinen/{id}")
+    public String handleDeleteUutinen(Model model, HttpSession session, @PathVariable long id) {
+        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+            return "redirect:/toimittaja";
+        } else {
+            uutisService.poistaUutinen(id);
+            return "redirect:/toimittaja/uutiset";
         }
     }
 }
