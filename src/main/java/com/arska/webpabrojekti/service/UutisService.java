@@ -47,8 +47,8 @@ public class UutisService {
         uutisRepository.deleteById(id);
     }
     
-    public Uutinen alustaUutinen(String otsikko, String ingressi, String sisalto, byte[] kuva, UutisKategoria kategoria, Toimittaja toimittaja){
-        Uutinen uutinen = new Uutinen(otsikko, ingressi, sisalto, System.currentTimeMillis(), System.currentTimeMillis(), kuva, 0, Arrays.asList(kategoria), Arrays.asList(toimittaja));
+    public Uutinen alustaUutinen(String otsikko, String ingressi, String sisalto, byte[] kuva,List<UutisKategoria> kategoriat, Toimittaja toimittaja){
+        Uutinen uutinen = new Uutinen(otsikko, ingressi, sisalto, System.currentTimeMillis(), System.currentTimeMillis(), kuva, 0, kategoriat, Arrays.asList(toimittaja));
         return uutisRepository.save(uutinen);
     }
     

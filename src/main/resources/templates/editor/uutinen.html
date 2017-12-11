@@ -14,7 +14,7 @@
             <div class="container">
                 <a style="margin-bottom: 10px;" type="button" class="btn btn-primary btn-lg " href="/toimittaja/uutiset">Takaisin</a>
                 <div class="well well-default">
-                    <form th:action="@{~/toimittaja/uutinen/{id}(id=${uutinen.getId()})}" th:method="POST">
+                    <form th:action="@{~/toimittaja/uutinen/{id}(id=${uutinen.getId()})}" th:method="POST" enctype="multipart/form-data" >
                         <label for="otsikko">Otsikko</label>
                         <input required="true" type="text" class="form-control" id="otsikko" name="otsikko" th:value="${uutinen.otsikko}" />
                         <label for="ingressi">Ingressi</label>
@@ -25,6 +25,8 @@
                         <select  required="true" multiple="true" class="form-control" id="kategoriat" name="kategoriat" size="7" >
                             <option th:each="kategoria : ${kategoriat}" th:text="${kategoria.teksti}" th:value="${kategoria.getId()}" th:selected="${uutinen.kategoriat.contains(kategoria)}"></option>
                         </select>
+                        <label for="kuva">Kuva uutiselle</label>
+                        <input type="file" name="kuva" id="kuva" accept="image/*" />
                         
                         <input class="btn btn-primary" type="submit" style="margin-top: 20px;" value="Muokkaa"/>
                     </form>

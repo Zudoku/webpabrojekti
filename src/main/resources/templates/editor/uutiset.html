@@ -19,16 +19,24 @@
                         <h3 class="panel-title">Uusi uutinen</h3>
                     </div>
                     <div class="panel-body">
-                        <form class="form-inline" th:action="@{~/toimittaja/uutiset}" th:method="POST">
-                            <input type="text" class="form-control" id="teksti" name="teksti"  />
-                            <label>
-                                <input type="checkbox" class="checkbox" id="julkisuus" name="julkisuus" /> Julkinen kategoria
-                            </label>
-                            <input class="btn btn-primary" type="submit" value="Vahvista"/>
-                        </form>
+                        <form th:action="@{~/toimittaja/uutinen/}" th:method="POST" enctype="multipart/form-data" >
+                        <label for="otsikko">Otsikko</label>
+                        <input required="true" type="text" class="form-control" id="otsikko" name="otsikko" />
+                        <label for="ingressi">Ingressi</label>
+                        <input required="true" type="text" class="form-control" id="ingressi" name="ingressi" />
+                        <label for="sisalto">Sisältö</label>
+                        <textarea required="true" class="form-control" id="sisalto" name="sisalto" rows="5" ></textarea>
+                        <label for="kategoriat">Kategoriat</label>
+                        <select  required="true" multiple="true" class="form-control" id="kategoriat" name="kategoriat" size="7" >
+                            <option th:each="kategoria : ${kategoriat}" th:text="${kategoria.teksti}" th:value="${kategoria.getId()}" ></option>
+                        </select>
+                        <label for="kuva">Kuva uutiselle</label>
+                        <input type="file" name="kuva" id="kuva" accept="image/*" />
+                        <input class="btn btn-primary" type="submit" style="margin-top: 20px;" value="Luo uutinen"/>
+                    </form>
                     </div>
                 </div>
-                <div th:each="uutinen : ${uutiset}">
+                <div th:each="uutinen : ${uutiset}" style="margin-bottom: 20px;">
                     <a style="margin-top:5px;"type="button" class="btn btn-primary btn-lg btn-block" th:href="@{~/toimittaja/uutinen/{id}(id=${uutinen.getId()})}">
                         <label th:text="${uutinen.otsikko}">Uutisen otsikko</label>
                     </a>
