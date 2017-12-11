@@ -7,7 +7,6 @@
 package com.arska.webpabrojekti.controller.toimittaja;
 
 import com.arska.webpabrojekti.domain.Toimittaja;
-import com.arska.webpabrojekti.service.KategoriaService;
 import com.arska.webpabrojekti.service.ToimittajaService;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +31,7 @@ public class MuokkausController {
     
     @GetMapping("/toimittaja")
     public String handleDefault(Model model, HttpSession session) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "editor/login";
         } else {
             long sessionToimittajaID = (long) session.getAttribute(TOIMITTAJAID);
@@ -54,9 +53,9 @@ public class MuokkausController {
         return "redirect:/toimittaja";
     }
     
-    public static boolean needLogin(HttpSession session){
+    public static boolean needLogin(HttpSession session, ToimittajaService tservice){
         return (session == null || session.getAttribute(TOIMITTAJAID) == null || 
-                !(session.getAttribute(TOIMITTAJAID) instanceof Long) );
+                !(session.getAttribute(TOIMITTAJAID) instanceof Long) || tservice.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null );
     }
     
 

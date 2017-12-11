@@ -15,10 +15,7 @@ import com.arska.webpabrojekti.service.ToimittajaService;
 import com.arska.webpabrojekti.service.UutisService;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +25,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -49,7 +45,7 @@ public class UutisController {
     
     @GetMapping("/toimittaja/uutiset")
     public String handleGetUutiset(Model model, HttpSession session) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             long sessionToimittajaID = (long) session.getAttribute(TOIMITTAJAID);
@@ -62,7 +58,7 @@ public class UutisController {
     
     @GetMapping("/toimittaja/uutinen/{id}")
     public String handleGetUutinen(Model model, HttpSession session, @PathVariable long id) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             long sessionToimittajaID = (long) session.getAttribute(TOIMITTAJAID);
@@ -78,7 +74,7 @@ public class UutisController {
             @RequestParam String  otsikko, @RequestParam String  ingressi, 
             @RequestParam String  sisalto, @RequestParam("kuva") MultipartFile kuva,
             @RequestParam String[]  kategoriat) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             long sessionToimittajaID = (long) session.getAttribute(TOIMITTAJAID);
@@ -108,7 +104,7 @@ public class UutisController {
             @RequestParam String  otsikko, @RequestParam String  ingressi, 
             @RequestParam String  sisalto, @RequestParam("kuva") MultipartFile kuva,
             @RequestParam String[]  kategoriat) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             long sessionToimittajaID = (long) session.getAttribute(TOIMITTAJAID);
@@ -132,7 +128,7 @@ public class UutisController {
     
     @DeleteMapping("/toimittaja/uutinen/{id}")
     public String handleDeleteUutinen(Model model, HttpSession session, @PathVariable long id) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             uutisService.poistaUutinen(id);

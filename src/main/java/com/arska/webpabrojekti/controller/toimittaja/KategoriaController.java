@@ -36,7 +36,7 @@ public class KategoriaController {
     
     @GetMapping("/toimittaja/kategoriat")
     public String handleGetKategoriat(Model model, HttpSession session) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             long sessionToimittajaID = (long) session.getAttribute(TOIMITTAJAID);
@@ -48,7 +48,7 @@ public class KategoriaController {
     
     @GetMapping("/toimittaja/kategoria/{id}")
     public String handleGetKategoria(Model model, HttpSession session, @PathVariable long id) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             long sessionToimittajaID = (long) session.getAttribute(TOIMITTAJAID);
@@ -59,8 +59,9 @@ public class KategoriaController {
     }
     
     @PostMapping("/toimittaja/kategoriat")
-    public String handleNewKategoria(Model model, HttpSession session, @RequestParam String  teksti, @RequestParam(required=false) Boolean julkisuus) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+    public String handleNewKategoria(Model model, HttpSession session, 
+            @RequestParam String  teksti, @RequestParam(required=false) Boolean julkisuus) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             boolean julkisuusValue = (julkisuus == null) ? false : julkisuus;
@@ -71,7 +72,7 @@ public class KategoriaController {
     
     @DeleteMapping("/toimittaja/kategoria/{id}")
     public String handleDeleteKategoria(Model model, HttpSession session, @PathVariable long id) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             kategoriaService.poistaKategoria(id);
@@ -82,7 +83,7 @@ public class KategoriaController {
     @PostMapping("/toimittaja/kategoria/{id}")
     public String handleUpdateKategoria(Model model, HttpSession session, @RequestParam String  teksti, 
             @RequestParam(required=false) Boolean julkisuus, @PathVariable long id) {
-        if (needLogin(session) || toimittajaService.getToimittaja((long) session.getAttribute(TOIMITTAJAID)) == null) {
+        if (needLogin(session, toimittajaService)) {
             return "redirect:/toimittaja";
         } else {
             boolean julkisuusValue = (julkisuus == null) ? false : julkisuus;

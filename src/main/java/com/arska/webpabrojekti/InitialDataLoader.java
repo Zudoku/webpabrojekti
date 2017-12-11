@@ -67,6 +67,7 @@ public class InitialDataLoader implements ApplicationRunner {
         some = new UutisKategoria(false, "Sosiaalinen media", new ArrayList<>());
         viihde = new UutisKategoria(false, "Viihde", new ArrayList<>());
         politiikka = new UutisKategoria(false, "Politiikka", new ArrayList<>());
+        
         kategoriaRepository.save(urheilu);
         kategoriaRepository.save(terveys);
         kategoriaRepository.save(viihde);

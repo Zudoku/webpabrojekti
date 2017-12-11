@@ -54,7 +54,16 @@ public class KategoriaService {
     }
     
     public void poistaKategoria(long id) {
-        kategoriaRepository.deleteById(id);
+        UutisKategoria kategoria = getKategoria(id);
+        if(kategoria != null){
+            List<Uutinen> kategorianUutiset = getAllFromCategory(id);
+            for(Uutinen uutinen : kategorianUutiset) {
+                uutinen.getKategoriat().remove(kategoria);
+                uutisRepository.save(uutinen);
+            }
+            
+            kategoriaRepository.deleteById(id);
+        }
     }
     
     public void paivitaKategoria(long id, boolean julkisuus, String teksti){
@@ -72,6 +81,9 @@ public class KategoriaService {
             if(first){
                 return uutisRepository.findFirst5ByKategoriatContaining(kategoria, Sort.by(Sort.Direction.DESC, "visits"));
             } else {
+                if(page < 0){
+                    return new ArrayList<>();
+                }
                 return uutisRepository.findByKategoriatContaining(kategoria, PageRequest.of(page, 5, Sort.Direction.DESC, "visits"));
             }
         }
@@ -85,6 +97,9 @@ public class KategoriaService {
             if(first){
                 return uutisRepository.findFirst5ByKategoriatContaining(kategoria, Sort.by(Sort.Direction.DESC, "created"));
             } else {
+                if(page < 0){
+                    return new ArrayList<>();
+                }
                 return uutisRepository.findByKategoriatContaining(kategoria, PageRequest.of(page, 5, Sort.Direction.DESC, "created"));
             }
         }
